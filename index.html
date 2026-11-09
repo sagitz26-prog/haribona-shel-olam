@@ -781,11 +781,12 @@ function gem(n){const o=['','א','ב','ג','ד','ה','ו','ז','ח','ט'],t=['',
 /* ---------- siddur (lazy JSON from Sefaria, open licences) ---------- */
 const NUS={edot:'עדות המזרח',sefard:'ספרד',ashkenaz:'אשכנז'};
 const SECS=[['shacharit','שחרית'],['mincha','מנחה'],['arvit','ערבית'],['shema_hamita','ק"ש על המיטה'],['birkat_hamazon','ברכת המזון'],['meein_shalosh','מעין שלוש'],['brachot','ברכות הנהנין'],['derech','תפילת הדרך'],['hallel','הלל'],['chanukah','נרות חנוכה'],['tehillim','תהילים'],['tikkun','תיקון הכללי']];
-const sid={n:(k=>NUS[k]?k:'edot')(localStorage.getItem('nusach')),sec:null,cache:{}};
+const sid={n:(k=>NUS[k]?k:'edot')((()=>{try{return localStorage.getItem('nusach')||(JSON.parse(localStorage.getItem('rbs_onboard')||'null')||{}).nusach}catch(e){return null}})()),sec:null,cache:{}};
+function setNusach(k){if(!NUS[k])return;sid.n=k;try{localStorage.setItem('nusach',k)}catch(e){}const o=(typeof getOnboard==='function')&&getOnboard();if(o){o.nusach=k;saveOnboard(o)}if($('#nusRow'))sidChips();if(sid.sec)sidShow(sid.sec);if(typeof renderPrayNow==='function')renderPrayNow()}
 const getJ=u=>sid.cache[u]||(sid.cache[u]=fetch(u).then(r=>{if(!r.ok)throw 0;return r.json()}));
 function sidChips(){
  $('#nusRow').innerHTML='<span class="attr" style="flex:none;align-self:center">נוסח:</span>'+Object.entries(NUS).map(([k,v])=>`<button class="chip ${sid.n===k?'on':''}" data-n="${k}">${v}</button>`).join('');
- $('#nusRow').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{sid.n=b.dataset.n;try{localStorage.setItem('nusach',sid.n)}catch(e){};sidChips();if(sid.sec)sidShow(sid.sec)});
+ $('#nusRow').querySelectorAll('.chip').forEach(b=>b.onclick=()=>setNusach(b.dataset.n));
  $('#secRow').innerHTML=SECS.map(([k,v])=>`<button class="chip ${sid.sec===k?'on':''} ${k==='tikkun'?'gold':''}" data-s="${k}">${v}</button>`).join('');
  $('#secRow').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{sid.sec=b.dataset.s;sidChips();sidShow(sid.sec)});
 }
@@ -977,10 +978,12 @@ function renderPrayNow(){
   <h3>${esc(p.title)}</h3>
   <p>${esc(p.why)}</p>
   <p class="attr">${esc(p.when||'')}</p>
-  <button class="btn" type="button" id="npGo">${esc(p.title)} בנוסח שלכם</button>
+  <div class="np-quick" id="npNus" role="radiogroup" aria-label="הנוסח שלי"><span class="attr" style="flex:none;align-self:center">הנוסח שלי:</span>${Object.entries(NUS).map(([k,v])=>`<button class="chip ${sid.n===k?'on':''}" type="button" role="radio" aria-checked="${sid.n===k}" data-nus="${k}">${v}</button>`).join('')}</div>
+  <button class="btn" type="button" id="npGo">${esc(p.title)} · נוסח ${esc(NUS[sid.n])}</button>
   ${p.also?`<button class="lk" type="button" id="npAlso" style="margin-inline-start:10px">${esc(p.alsoTitle)}</button>`:''}
   <div class="np-quick">${extras.map(([k,l])=>`<button class="chip" type="button" data-pr="${k}">${l}</button>`).join('')}</div>
-  <div class="nus-note">הסידור פתוח בשלושה נוסחים: עדות המזרח, ספרד ואשכנז. בחרו את הנוסח שאתם רגילים אליו – בלי לחלק בין קהילות. אפשר גם לפתוח את <a href="#sidS">הסידור המלא</a>.</div>`;
+  <div class="nus-note">הסידור פתוח בשלושה נוסחים: עדות המזרח, ספרד ואשכנז. הנוסח שבחרתם נזכר במכשיר הזה ונפתח אוטומטית בכל ביקור; אפשר להחליף בכל רגע. אפשר גם לפתוח את <a href="#sidS">הסידור המלא</a>.</div>`;
+ el.querySelectorAll('[data-nus]').forEach(b=>b.onclick=()=>setNusach(b.dataset.nus));
  el.querySelector('#npGo').onclick=()=>goTo(p.k);
  const a=el.querySelector('#npAlso'); if(a) a.onclick=()=>goTo(p.also);
  el.querySelectorAll('[data-pr]').forEach(b=>b.onclick=()=>goTo(b.dataset.pr));
@@ -1042,6 +1045,8 @@ function renderMembers(){
      <div class="choices">${HABITS.map(h=>`<label><input type="checkbox" name="does" value="${h.k}">${esc(h.l)}</label>`).join('')}</div></div>
     <div class="fld"><span class="l">במה תרצו להתחזק?</span>
      <div class="choices">${HABITS.map(h=>`<label><input type="checkbox" name="want" value="${h.k}" id="onbWant-${h.k}">${esc(h.l)}</label>`).join('')}</div></div>
+    <div class="fld"><span class="l">באיזה נוסח אתם מתפללים?</span>
+     <div class="choices">${Object.entries(NUS).map(([k,v])=>`<label><input type="radio" name="nusach" value="${k}" id="onbNus-${k}"${sid.n===k?' checked':''}>${v}</label>`).join('')}</div></div>
     <button class="btn" type="submit" id="onbStart">התחילו בעדינות</button>
     <p class="note" style="margin-top:10px">הבחירות נשמרות במכשיר הזה בלבד. ההצעות לקוחות מדברי חז״ל ופוסקים, עם מקור ליד כל צעד. הן אינן דברי הרב – ורק כשתלחצו להאזין, תשמעו הקלטה אמיתית משיעוריו.</p>
    </form></div>`;
@@ -1053,6 +1058,7 @@ function renderMembers(){
    <div class="prog"><div class="bar"><i style="width:${done.length/PATH.length*100}%"></i></div><span id="pathCnt">${done.length}/${PATH.length} היום</span>${lv.streak>1?`<span>· ${lv.streak} ימים ברצף</span>`:''}<span>· רמה ${lv.level}</span></div>
    <ul class="path">${items.map(p=>`<li class="${p.on?'done':''}"><button class="tick" type="button" data-k="${p.k}" aria-pressed="${p.on}" aria-label="${esc(p.t)} – ${p.on?'בוצע':'לסמן כבוצע'}">${p.on?'✓':''}</button><div class="pt"><b>${esc(p.t)}</b>${esc(p.d)}${p.a?` <button class="lk" type="button" data-go="${p.a[1]}">${esc(p.a[0])}</button>`:''}<span class="src-line">מקור: ${esc(p.s)}</span></div></li>`).join('')}</ul>
    <p style="margin-top:10px"><button class="lk" type="button" data-go="tehillim">לתהילים</button> · <button class="lk" type="button" data-go="pray">לתפילה של עכשיו</button> · <button class="lk" type="button" id="onbEdit">לערוך את ההיכרות</button></p>
+   <p class="attr" id="astNus">התפילות נפתחות בנוסח ${esc(NUS[sid.n])} · <a href="#prayNow">להחלפת נוסח</a></p>
    <div class="note" style="margin-top:8px">העוזר הוא הצעה של צוות האתר על פי מקורות שצוינו – אינו ציטוט מדברי הרב. הצדקה נעשית אצלכם, במקום שנוח לכם; אין באתר קישור או מספר לתשלום. הסימונים שמורים במכשיר הזה בלבד.</div></div>`;
  }
  M.innerHTML=`<div class="mhead"><h3>שלום ${esc(first)}, ברוכים הבאים לקהילה</h3><button class="lk" type="button" id="memOut">לא את/ה? יציאה מהמכשיר</button></div>${body}
@@ -1064,8 +1070,9 @@ function renderMembers(){
  M.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>goTo(b.dataset.go));
  const of=$('#onbForm');
  if(of) of.onsubmit=ev=>{ev.preventDefault();const does=[...of.querySelectorAll('[name=does]:checked')].map(i=>i.value),want=[...of.querySelectorAll('[name=want]:checked')].map(i=>i.value);
-  saveOnboard({does,want,at:new Date().toISOString()});renderMembers()};
- const ed=$('#onbEdit'); if(ed) ed.onclick=()=>{try{localStorage.removeItem(ONB_KEY)}catch(e){} renderMembers()};
+  const nr=of.querySelector('[name=nusach]:checked'),nus=nr?nr.value:sid.n;
+  saveOnboard({does,want,nusach:nus,at:new Date().toISOString()});setNusach(nus);renderMembers()};
+ const ed=$('#onbEdit'); if(ed) ed.onclick=()=>{try{localStorage.removeItem(ONB_KEY)}catch(e){} renderMembers()}; // nusach stays in 'nusach'
  $('#memOut').onclick=()=>{try{localStorage.removeItem(MEM_KEY)}catch(e){};renderMembers()};
 }
 function goTo(g){
