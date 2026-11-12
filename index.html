@@ -717,7 +717,7 @@ function newestMerged(){const out=[];let i=0,j=0;while(i<ytNewest.length||j<ttNe
 /* ---------- library ---------- */
 const st={sort:'new',src:'all',theme:null,hol:null,q:'',n:24};
 function norm(s){return s.replace(/[\u0591-\u05BD\u05BF-\u05C7]/g,'').replace(/[״"׳']/g,'').replace(/[\u05BE\-–]/g,' ').replace(/[ךםןףץ]/g,c=>({'ך':'כ','ם':'מ','ן':'נ','ף':'פ','ץ':'צ'})[c]).toLowerCase()}
-ITEMS.forEach(x=>x._n=norm(x.t));
+ITEMS.forEach(x=>x._n=norm(x.t+' '+(x.th||'').replace(/[;/]/g,' ')+' '+(x.ho||'').replace(/;/g,' ')));
 function filtered(){
  let L=st.sort==='new'?newestMerged():[...ITEMS].sort((a,b)=>b.v-a.v);
  if(st.src!=='all')L=L.filter(x=>st.src==='yt'?(x.s==='yt'||x.s==='yl'):x.s===st.src);
