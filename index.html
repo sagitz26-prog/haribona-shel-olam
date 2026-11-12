@@ -6,6 +6,18 @@
 <title>הריבונה של עולם · תורתו וקולו של הרב מאיר כהן שליט"א</title>
 <meta name="description" content="כל השיעורים, הקטעים והמשפטים של הרב מאיר כהן שליט&quot;א מבית שמש, במקום אחד">
 <meta name="theme-color" content="#13294b">
+<link rel="canonical" href="https://sagitz26-prog.github.io/haribona-shel-olam/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="הריבונה של עולם">
+<meta property="og:title" content="הריבונה של עולם · תורתו וקולו של הרב מאיר כהן שליט&quot;א">
+<meta property="og:description" content="שיעורים, קטעים בקולו של הרב, משפט היום, מצווה יומית וסידור – במקום אחד">
+<meta property="og:url" content="https://sagitz26-prog.github.io/haribona-shel-olam/">
+<meta property="og:image" content="https://sagitz26-prog.github.io/haribona-shel-olam/img/rav-writing.jpg">
+<meta property="og:image:alt" content="הרב מאיר כהן שליט&quot;א">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2313294b'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%23d9b766' font-family='serif' font-weight='700'%3E%D7%94%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="https://sagitz26-prog.github.io/haribona-shel-olam/img/rav-writing.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -29,6 +41,13 @@ h1{font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:clamp(34px,9vw
 .cal div{background:rgba(255,255,255,.07);border:1px solid rgba(217,183,102,.28);border-radius:12px;padding:8px 10px;font-size:13px;line-height:1.35}
 .cal b{display:block;font-family:"Frank Ruhl Libre",serif;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#f3dfa8;font-weight:700}
 .cal .wide{grid-column:1/-1}
+.skip{position:absolute;top:-60px;right:8px;z-index:200;background:var(--gold);color:#13294b;padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}
+.skip:focus{top:8px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.totop{position:fixed;left:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:90;width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:var(--blue);color:#f3dfa8;font-size:22px;line-height:1;cursor:pointer;box-shadow:0 6px 18px rgba(13,29,55,.35);opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .2s,transform .2s}
+.totop.on{opacity:.92;pointer-events:auto;transform:none}
+.clr{border:1px solid var(--gold);background:#fffaf0;color:var(--blue);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer;margin-top:6px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 /* sections */
 section{margin:22px 0}
 .h2{font-family:"Frank Ruhl Libre",serif;font-size:24px;font-weight:700;margin:0 0 10px;color:var(--blue);display:flex;align-items:center;gap:10px}
@@ -85,6 +104,7 @@ section{margin:22px 0}
 .meta{font-size:11px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
 .src{font-weight:700}.src.yt,.src.ys,.src.yl{color:#b3261e}.src.tt{color:#111}
 .more{display:block;margin:14px auto;padding:10px 26px;border-radius:999px;border:1px solid var(--gold);background:var(--card);font:inherit;cursor:pointer;color:var(--blue)}
+.more[hidden]{display:none}
 /* quote cards */
 .q{background:var(--card);border:1px solid var(--stone2);border-right:3px solid var(--gold);border-radius:12px;padding:12px 14px;margin:10px 0}
 .q p{font-family:"Frank Ruhl Libre",serif;font-size:18px;line-height:1.55;margin:0 0 6px}
@@ -295,6 +315,8 @@ fieldset.dec legend{font-family:"Frank Ruhl Libre",serif;font-weight:700;color:v
 </style>
 </head>
 <body>
+<a class="skip" href="#main">דלג לתוכן הראשי</a>
+<noscript><div style="background:#fff3cd;color:#231d15;padding:12px 16px;text-align:center;font-size:15px">כדי לראות את השיעורים, ההקלטות והסידור יש להפעיל JavaScript בדפדפן.</div></noscript>
 <div class="ded" id="ded" hidden></div>
 <header>
  <div class="wrap">
@@ -312,7 +334,7 @@ fieldset.dec legend{font-family:"Frank Ruhl Libre",serif;font-weight:700;color:v
  </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main" tabindex="-1">
  <nav class="nav" aria-label="ניווט"><a href="#prayNow">תפילות</a><a href="#sayS">משפט היום</a><a href="#dailyS">השיעור היומי</a><a href="#calS">היום בלוח</a><a href="#voiceS">ספריית הקלטות</a><a href="#templeS">שערי הבית</a><a href="#sidS">סידור מלא</a><a href="#lib">כל השיעורים</a><a href="#commS">הקהילה</a><a href="#rabS">פנייה לרב</a><a href="#partS">שותפים</a></nav>
  <div class="topduo">
  <section id="prayNow">
@@ -371,9 +393,9 @@ fieldset.dec legend{font-family:"Frank Ruhl Libre",serif;font-weight:700;color:v
   <div class="h2">ספריית הקלטות</div>
   <p class="attr" style="margin:-4px 0 8px">בקולו של הרב · לפי נושאי תורה מאחדים – כל הקטעים הקוליים שנחתכו משיעוריו, עם מקור וזמנים</p>
   <label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6f6352" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-   <input id="vq" type="search" placeholder="חיפוש בקטעים… (למשל: האר״י, שמחה, חנוכה)" autocomplete="off"></label>
+   <input id="vq" type="search" aria-label="חיפוש בספריית ההקלטות" placeholder="חיפוש בקטעים… (למשל: האר״י, שמחה, חנוכה)" autocomplete="off"></label>
   <div class="row" id="vThemes"></div>
-  <div class="stat" id="vStat"></div>
+  <div class="stat" id="vStat" aria-live="polite"></div>
   <div id="vList"></div>
  </section>
 
@@ -397,12 +419,12 @@ fieldset.dec legend{font-family:"Frank Ruhl Libre",serif;font-weight:700;color:v
  <section id="lib">
   <div class="h2">כל השיעורים</div>
   <label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6f6352" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-   <input id="q" type="search" placeholder="חיפוש בכל השיעורים… (למשל: אמונה, בבא סאלי, ראש השנה)" autocomplete="off"></label>
+   <input id="q" type="search" aria-label="חיפוש בכל השיעורים" placeholder="חיפוש בכל השיעורים… (למשל: אמונה, בבא סאלי, ראש השנה)" autocomplete="off"></label>
   <div class="row" id="sortRow"></div>
   <div class="row" id="srcRow"></div>
   <div class="row" id="themeRow"></div>
   <div class="row" id="holRow"></div>
-  <div class="stat" id="stat"></div>
+  <div class="stat" id="stat" aria-live="polite"></div>
   <div class="grid" id="grid"></div>
   <button class="more" id="more">הצג עוד</button>
  </section>
@@ -705,7 +727,8 @@ function filtered(){
 }
 function renderLib(){
  const L=filtered();$('#stat').textContent=`${L.length.toLocaleString('he-IL')} שיעורים וסרטונים`+(L.length===ITEMS.length?` · ${DATA.counts.yt} שיעורים, ${DATA.counts.ys} קצרים, ${DATA.counts.yl} שידורים ביוטיוב, ${DATA.counts.tt} בטיקטוק`:'');
- $('#grid').innerHTML=L.slice(0,st.n).map(itemHTML).join('')||'<p class="attr">לא נמצאו תוצאות</p>';wireItems($('#grid'));
+ $('#grid').innerHTML=L.slice(0,st.n).map(itemHTML).join('')||`<div class="attr" style="text-align:center;padding:14px 0">לא נמצאו שיעורים${st.q?` עבור ״${esc(st.q)}״`:''} – נסו מילה אחרת או קצרה יותר.<br><button type="button" class="clr" id="libClr">ניקוי החיפוש והסינון</button></div>`;wireItems($('#grid'));
+ const lc=$('#libClr');if(lc)lc.onclick=()=>{st.q='';$('#q').value='';st.theme=null;st.hol=null;st.src='all';st.n=24;drawChips();renderLib();$('#q').focus()};
  $('#more').hidden=L.length<=st.n;
 }
 function chips(el,list,key,fmt){
@@ -947,7 +970,10 @@ function voiceLib(){
   ${v.quoted?`<div class="attr">${esc(v.quoted)} · מפי הרב מאיר כהן</div>`:''}
   <div class="player"><button class="pbtn sm" data-a="${esc(v.audio)}" aria-label="השמע">${PLAY}</button><div class="bar"><i></i></div><span class="ptxt">${v.dur?fmtD(v.dur):''}</span></div>
   <div class="qm" style="margin-top:6px"><span>${v.approx?'<span class="note">נוסח מקורב (תמלול אוטומטי) – הקול הוא המקור</span>':''}</span><a href="${v.url}" target="_blank" rel="noopener">למקור בטיקטוק (<bdi dir="ltr">${esc(v.start)}–${esc(v.end)}</bdi>)</a></div>
-  <div class="vmeta"><span class="badge season">${esc(v.season||v.made_for||'')}</span> ${v.themes.map(t=>`<span class="badge">${esc(t)}</span>`).join(' ')}</div></div>`).join('')||'<div class="note">לא נמצאו קטעים</div>';
+  <div class="vmeta"><span class="badge season">${esc(v.season||v.made_for||'')}</span> ${v.themes.map(t=>`<span class="badge">${esc(t)}</span>`).join(' ')}</div></div>`).join('')||(()=>{const o=vst.all?0:V0.filter(v=>!V.includes(v)&&(!vst.th||v.themes.includes(vst.th))&&q.every(w=>norm(v.text+' '+(v.quoted||'')+' '+(v.made_for||'')+' '+(v.season||'')+' '+v.themes.join(' ')).includes(w))).length;
+  return `<div class="attr" style="text-align:center;padding:14px 0">לא נמצאו קטעים${vst.q?` עבור ״${esc(vst.q)}״`:''}.${o?`<br><button type="button" class="clr" id="vOther">הצג ${o} קטעים מתאימים מעונות אחרות</button>`:''}<br><button type="button" class="clr" id="vClr">ניקוי החיפוש</button></div>`})();
+ const vo=$('#vOther');if(vo)vo.onclick=()=>{vst.all=true;voiceLib()};
+ const vc=$('#vClr');if(vc)vc.onclick=()=>{vst.q='';vst.th=null;$('#vq').value='';vst.n=12;voiceLib();$('#vq').focus()};
  if(L.length>vst.n)$('#vList').insertAdjacentHTML('beforeend',`<button class="chip" id="vMore" style="display:block;margin:8px auto">עוד ${Math.min(12,L.length-vst.n)} קטעים (${L.length-vst.n} נותרו)</button>`);
  const vm=$('#vMore');if(vm)vm.onclick=()=>{vst.n+=12;voiceLib()};
  $('#vList').querySelectorAll('[data-a]').forEach(b=>{const c=b.closest('.player');bindClip(b,b.dataset.a,c.querySelector('.bar i'),c.querySelector('.ptxt'),true)});
@@ -1381,5 +1407,7 @@ function community(){
 /* ---------- init ---------- */
 calendar();renderPrayNow();hilulot();renderSeason();renderMitzDay();renderParasha();renderSaying();voiceLib();siddur();calInit();renderDaily();temple();drawChips();renderLib();community();
 </script>
+<button type="button" class="totop" id="toTop" aria-label="חזרה לראש העמוד">↑</button>
+<script>(()=>{const b=document.getElementById('toTop');addEventListener('scroll',()=>b.classList.toggle('on',scrollY>900),{passive:true});b.onclick=()=>{scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})}})()</script>
 </body>
 </html>
