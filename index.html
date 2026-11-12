@@ -556,6 +556,7 @@ fieldset.dec legend{font-family:"Frank Ruhl Libre",serif;font-weight:700;color:v
    <a href="https://www.youtube.com/@meircohen1993" target="_blank" rel="noopener">ערוץ היוטיוב</a>
    <a href="https://www.tiktok.com/@.mikel.coresh" target="_blank" rel="noopener">טיקטוק</a>
    <a href="https://podscan.fm/podcasts/hrb-myr-khn" target="_blank" rel="noopener">הפודקאסט (ספוטיפיי / אפל)</a>
+   <button type="button" id="shareSite" style="background:none;border:1px solid #d9b766;color:#f3dfa8;border-radius:999px;padding:2px 14px;font:inherit;cursor:pointer">שתפו את האתר</button>
   </div>
   <div class="small">כל הדברים באתר הם דבריו של הרב מתוך שיעוריו המוקלטים, עם קישור למקור. היכן שכתוב "נוסח מקורב" – הטקסט נלקח מתמלול אוטומטי ויש לשמוע את המקור. תאריך עברי, פרשה וזמנים: Hebcal.com · התאריך העברי מתחלף בשקיעה (בית שמש) · נוסחי התפילה: Sefaria (ראו קרדיט בסידור) · לוח ההילולות והאירועים: ויקיפדיה העברית (לא מאומת אלא אם צוין) · אב־טיפוס</div>
  </div>
@@ -715,7 +716,7 @@ function newestMerged(){const out=[];let i=0,j=0;while(i<ytNewest.length||j<ttNe
 
 /* ---------- library ---------- */
 const st={sort:'new',src:'all',theme:null,hol:null,q:'',n:24};
-function norm(s){return s.replace(/[\u0591-\u05C7]/g,'').replace(/[״"׳']/g,'').toLowerCase()}
+function norm(s){return s.replace(/[\u0591-\u05BD\u05BF-\u05C7]/g,'').replace(/[״"׳']/g,'').replace(/[\u05BE\-–]/g,' ').replace(/[ךםןףץ]/g,c=>({'ך':'כ','ם':'מ','ן':'נ','ף':'פ','ץ':'צ'})[c]).toLowerCase()}
 ITEMS.forEach(x=>x._n=norm(x.t));
 function filtered(){
  let L=st.sort==='new'?newestMerged():[...ITEMS].sort((a,b)=>b.v-a.v);
@@ -1408,6 +1409,7 @@ function community(){
 calendar();renderPrayNow();hilulot();renderSeason();renderMitzDay();renderParasha();renderSaying();voiceLib();siddur();calInit();renderDaily();temple();drawChips();renderLib();community();
 </script>
 <button type="button" class="totop" id="toTop" aria-label="חזרה לראש העמוד">↑</button>
-<script>(()=>{const b=document.getElementById('toTop');addEventListener('scroll',()=>b.classList.toggle('on',scrollY>900),{passive:true});b.onclick=()=>{scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})}})()</script>
+<script>(()=>{const sh=document.getElementById('shareSite');if(sh)sh.onclick=async()=>{const u='https://sagitz26-prog.github.io/haribona-shel-olam/',t=document.title;try{if(navigator.share){await navigator.share({title:t,url:u});return}await navigator.clipboard.writeText(u);sh.textContent='הקישור הועתק ✓'}catch(e){if(e&&e.name!=='AbortError'){prompt('העתיקו את הקישור:',u)}}};})();
+(()=>{const b=document.getElementById('toTop');addEventListener('scroll',()=>b.classList.toggle('on',scrollY>900),{passive:true});b.onclick=()=>{scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})}})()</script>
 </body>
 </html>
