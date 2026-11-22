@@ -272,6 +272,25 @@ fieldset.dec legend{font-family:"Frank Ruhl Libre",serif;font-weight:700;color:v
 .np-quick{display:flex;gap:6px;overflow-x:auto;padding:4px 0 2px;scrollbar-width:none;margin-top:8px}.np-quick::-webkit-scrollbar{display:none}
 .np-quick .chip{flex:none}
 .nus-note{font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:8px}
+.chazan{border:1px solid var(--gold);background:linear-gradient(160deg,#fffaf0,#f4ead6);margin-top:12px}
+.chazan .np-k{font-size:12px;letter-spacing:1px;color:var(--gold);font-weight:700}
+.chazan h3{font-family:"Frank Ruhl Libre",serif;font-size:clamp(20px,4.6vw,26px);color:var(--blue);margin:4px 0 8px;line-height:1.35}
+.chazan .lead{font-size:15px;line-height:1.65;margin:0 0 10px}
+.cz-box{background:#fff;border:1px solid var(--gold);border-radius:12px;padding:10px 12px;margin:10px 0 0}
+.cz-box .k{display:block;color:var(--gold);font-size:13px;font-weight:700;letter-spacing:.4px;margin-bottom:4px}
+.cz-box ul{margin:0;padding:0;list-style:none}
+.cz-box li{padding:8px 0;border-bottom:1px solid var(--stone2);font-size:14.5px;line-height:1.55}
+.cz-box li:last-child{border-bottom:0;padding-bottom:0}
+.cz-list li{padding-right:22px;position:relative}
+.cz-list li:before{content:"✓";position:absolute;right:0;top:8px;color:var(--gold);font-weight:700}
+.cz-soon{margin-top:8px;font-size:13.5px;line-height:1.55;color:var(--blue);background:rgba(19,41,75,.05);border-radius:8px;padding:8px 10px}
+.chazan details.czd{margin-top:10px;background:#fffdf8;border:1px solid var(--stone3);border-radius:12px;padding:8px 12px 12px}
+.chazan details.czd summary{cursor:pointer;font-family:"Frank Ruhl Libre",serif;font-weight:700;color:var(--blue);font-size:17px;line-height:1.4}
+.chazan .prayer-txt{font-family:"Frank Ruhl Libre","David",serif;font-size:19px;line-height:1.9;margin:8px 0 0;text-align:justify}
+.chazan .prayer-txt p{margin:0 0 10px}
+.chazan .cz-note{font-size:13px;line-height:1.6;color:var(--muted);margin:8px 0}
+@media(max-width:480px){.chazan .prayer-txt{font-size:18px;line-height:1.85}}
+
 .src-line{display:block;font-size:12px;color:#6f6352;line-height:1.5;margin-top:4px}
 .choices{display:grid;gap:6px;margin:8px 0 4px}
 .choices label{display:flex;gap:8px;align-items:flex-start;background:#fffdf8;border:1px solid var(--stone2);border-radius:10px;padding:8px 10px;font-size:14px;cursor:pointer}
@@ -342,6 +361,7 @@ fieldset.dec legend{font-family:"Frank Ruhl Libre",serif;font-weight:700;color:v
  <section id="prayNow">
   <div class="h2">תפילות</div>
   <div class="card nowpray" id="prayNowCard">טוען לפי זמן היום בבית שמש…</div>
+  <div class="card chazan" id="chazanCard" aria-labelledby="chazanTitle">טוען את תפילת שליח הציבור…</div>
  </section>
 
  <section id="sayS">
@@ -560,7 +580,7 @@ fieldset.dec legend{font-family:"Frank Ruhl Libre",serif;font-weight:700;color:v
    <a href="https://podscan.fm/podcasts/hrb-myr-khn" target="_blank" rel="noopener">הפודקאסט (ספוטיפיי / אפל)</a>
    <button type="button" id="shareSite" style="background:none;border:1px solid #d9b766;color:#f3dfa8;border-radius:999px;padding:2px 14px;font:inherit;cursor:pointer">שתפו את האתר</button>
   </div>
-  <div class="small">כל הדברים באתר הם דבריו של הרב מתוך שיעוריו המוקלטים, עם קישור למקור. היכן שכתוב "נוסח מקורב" – הטקסט נלקח מתמלול אוטומטי ויש לשמוע את המקור. תאריך עברי, פרשה וזמנים: Hebcal.com · התאריך העברי מתחלף בשקיעה (בית שמש) · נוסחי התפילה: Sefaria (ראו קרדיט בסידור) · לוח ההילולות והאירועים: ויקיפדיה העברית (לא מאומת אלא אם צוין) · אב־טיפוס</div>
+  <div class="small">כל הדברים באתר הם דבריו של הרב מתוך שיעוריו המוקלטים, עם קישור למקור. היכן שכתוב "נוסח מקורב" – הטקסט נלקח מתמלול אוטומטי ויש לשמוע את המקור. תאריך עברי, פרשה וזמנים: Hebcal.com · התאריך העברי מתחלף בשקיעה (בית שמש) · נוסחי התפילה: Sefaria (ראו קרדיט בסידור) · תפילת שליח הציבור: משנה ברכות ד,ב; בבלי ברכות כח ע״ב; שו״ע או״ח; מחזור לר״ה (ויקיטקסט) · לוח ההילולות והאירועים: ויקיפדיה העברית (לא מאומת אלא אם צוין) · אב־טיפוס</div>
  </div>
 </footer>
 
@@ -995,7 +1015,7 @@ function gem(n){const o=['','א','ב','ג','ד','ה','ו','ז','ח','ט'],t=['',
 const NUS={edot:'עדות המזרח',sefard:'ספרד',ashkenaz:'אשכנז'};
 const SECS=[['shacharit','שחרית'],['mincha','מנחה'],['arvit','ערבית'],['shema_hamita','ק"ש על המיטה'],['birkat_hamazon','ברכת המזון'],['meein_shalosh','מעין שלוש'],['brachot','ברכות הנהנין'],['derech','תפילת הדרך'],['hallel','הלל'],['chanukah','נרות חנוכה'],['tehillim','תהילים'],['tikkun','תיקון הכללי']];
 const sid={n:(k=>NUS[k]?k:'edot')((()=>{try{return localStorage.getItem('nusach')||(JSON.parse(localStorage.getItem('rbs_onboard')||'null')||{}).nusach}catch(e){return null}})()),sec:null,cache:{}};
-function setNusach(k){if(!NUS[k])return;sid.n=k;try{localStorage.setItem('nusach',k)}catch(e){}const o=(typeof getOnboard==='function')&&getOnboard();if(o){o.nusach=k;saveOnboard(o)}if($('#nusRow'))sidChips();if(sid.sec)sidShow(sid.sec);if(typeof renderPrayNow==='function')renderPrayNow()}
+function setNusach(k){if(!NUS[k])return;sid.n=k;try{localStorage.setItem('nusach',k)}catch(e){}const o=(typeof getOnboard==='function')&&getOnboard();if(o){o.nusach=k;saveOnboard(o)}if($('#nusRow'))sidChips();if(sid.sec)sidShow(sid.sec);if(typeof renderPrayNow==='function')renderPrayNow();if(typeof renderChazan==='function')renderChazan()}
 const getJ=u=>sid.cache[u]||(sid.cache[u]=fetch(u).then(r=>{if(!r.ok)throw 0;return r.json()}));
 function sidChips(){
  $('#nusRow').innerHTML='<span class="attr" style="flex:none;align-self:center">נוסח:</span>'+Object.entries(NUS).map(([k,v])=>`<button class="chip ${sid.n===k?'on':''}" data-n="${k}">${v}</button>`).join('');
@@ -1024,24 +1044,34 @@ function sidShow(k){
   B.innerHTML=`<div class="prayer">${S.parts.map(p=>`<h4>${esc(p.title)}</h4>`+p.lines.map(line).join('')).join('')}</div>`;
  }).catch(()=>{B.innerHTML='<div class="note">לא ניתן לטעון את הסידור בפתיחה מקובץ מקומי – פתחו את האתר דרך הקישור.</div>'});
 }
+function hebMD(){const e=EFF();let m='',d=0;try{const f=new Intl.DateTimeFormat('en-u-ca-hebrew',{month:'long',day:'numeric'}).formatToParts(e);m=f.find(x=>x.type==='month').value;d=+f.find(x=>x.type==='day').value}catch(x){}
+ const ORD=['Tishri','Heshvan','Kislev','Tevet','Shevat','Adar I','Adar II','Adar','Nisan','Iyar','Sivan','Tamuz','Av','Elul'];
+ return {e,m,d,mi:ORD.indexOf(m)}}
+function seasonFlags(){const {mi,d}=hebMD();
+ return {geshem:(mi===0&&d>=22)||(mi>0&&mi<8)||(mi===8&&d<15),tal:(mi===1&&d>=7)||(mi>1&&mi<8)||(mi===8&&d<15),tishri22:mi===0&&d===22,nisan15:mi===8&&d===15,toChanukah:(mi===2&&d<25)?(25-d):null,mi,d}}
+let HEBDAY=null,HEBDAYQ=null;
+function fetchHebDay(){if(HEBDAY)return Promise.resolve(HEBDAY);if(HEBDAYQ)return HEBDAYQ;const e=EFF();
+ HEBDAYQ=fetch(`https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&i=on&lg=he&start=${ymd(e)}&end=${ymd(e)}`).then(r=>r.json()).then(j=>{HEBDAY=j;return j});
+ return HEBDAYQ}
+function holidayFlags(j){const t=((j&&j.items)||[]).map(i=>i.title_orig||'').join('|');
+ return {rosh:/Rosh Chodesh/.test(t),chanukah:/Chanukah/.test(t),purim:/Purim(?! Katan)/.test(t),moed:/Pesach|Sukkot|Shavuot/.test(t),fast:/Tzom|Asara|Ta'anit|Tish'a/.test(t),rh:/Rosh Hashana/.test(t),yk:/Yom Kippur/.test(t),shabbat:EFF().getDay()===6,titles:t}}
 function todayAdds(){
- const e=EFF();let m='',d=0;try{const f=new Intl.DateTimeFormat('en-u-ca-hebrew',{month:'long',day:'numeric'}).formatToParts(e);m=f.find(x=>x.type==='month').value;d=+f.find(x=>x.type==='day').value}catch(x){}
- const ORD=['Tishri','Heshvan','Kislev','Tevet','Shevat','Adar I','Adar II','Adar','Nisan','Iyar','Sivan','Tamuz','Av','Elul'];const mi=ORD.indexOf(m);
- const adds=[];
- const geshem=(mi===0&&d>=22)||(mi>0&&mi<8)||(mi===8&&d<15);
- adds.push(geshem?'בעמידה: "מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם"':'בעמידה: "מוֹרִיד הַטָּל" (בנוסח ספרד ועדות המזרח)');
- const tal=(mi===1&&d>=7)||(mi>1&&mi<8)||(mi===8&&d<15);
- adds.push(tal?'בברכת השנים: "וְתֵן טַל וּמָטָר לִבְרָכָה" (בארץ ישראל מז׳ חשוון)':'בברכת השנים: "וְתֵן בְּרָכָה"');
+ const s=seasonFlags(),adds=[];
+ if(s.tishri22) adds.push('שמע״צ: בשחרית עדיין "מוֹרִיד הַטָּל"; ממוסף – "מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם"');
+ else if(s.nisan15) adds.push('פסח: בשחרית עדיין "מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם"; ממוסף – "מוֹרִיד הַטָּל" (ספרד ועדות המזרח)');
+ else adds.push(s.geshem?'בעמידה: "מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם"':'בעמידה: "מוֹרִיד הַטָּל" (בנוסח ספרד ועדות המזרח)');
+ adds.push(s.tal?'בברכת השנים: "וְתֵן טַל וּמָטָר לִבְרָכָה" (בארץ ישראל מז׳ חשוון)':'בברכת השנים: "וְתֵן בְּרָכָה"');
  $('#sidAdd').innerHTML='<b>תוספות לתפילה היום:</b><br>'+adds.map(esc).join('<br>');
- fetch(`https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&i=on&lg=he&start=${ymd(e)}&end=${ymd(e)}`).then(r=>r.json()).then(j=>{
-  const t=j.items.map(i=>i.title_orig||'').join('|');const x=[];
-  if(/Rosh Chodesh/.test(t))x.push('ראש חודש: "יעלה ויבוא", חצי הלל ומוסף');
-  if(/Chanukah/.test(t))x.push('חנוכה: "על הניסים" והלל שלם');
-  if(/Purim(?! Katan)/.test(t))x.push('פורים: "על הניסים"');
-  if(/Pesach|Sukkot|Shavuot/.test(t))x.push('מועד: "יעלה ויבוא" והלל');
-  if(/Tzom|Asara|Ta'anit|Tish'a/.test(t))x.push('תענית ציבור: "עננו"');
+ fetchHebDay().then(j=>{
+  const h=holidayFlags(j),x=[];
+  if(h.rosh)x.push('ראש חודש: "יעלה ויבוא", חצי הלל ומוסף');
+  if(h.chanukah)x.push('חנוכה: "על הניסים" והלל שלם');
+  if(h.purim)x.push('פורים: "על הניסים"');
+  if(h.moed)x.push('מועד: "יעלה ויבוא" והלל');
+  if(h.fast)x.push('תענית ציבור: "עננו"');
   if(x.length)$('#sidAdd').innerHTML+='<br>'+x.map(esc).join('<br>');
- }).catch(()=>{});
+  if(typeof renderChazan==='function')renderChazan(h);
+ }).catch(()=>{if(typeof renderChazan==='function')renderChazan(null)});
 }
 function siddur(){sidChips();todayAdds()}
 
@@ -1205,7 +1235,7 @@ function prayerNow(){
 function renderPrayNow(){
  const el=$('#prayNowCard'); if(!el) return;
  const p=prayerNow();
- const extras=[['birkat_hamazon','ברכת המזון'],['meein_shalosh','מעין שלוש'],['brachot','ברכות הנהנין'],['tehillim','תהילים'],['derech','תפילת הדרך'],['hallel','הלל']];
+ const extras=[['birkat_hamazon','ברכת המזון'],['meein_shalosh','מעין שלוש'],['brachot','ברכות הנהנין'],['tehillim','תהילים'],['derech','תפילת הדרך'],['hallel','הלל'],['#chazanCard','תפילת החזן']];
  el.innerHTML=`<div class="np-k">מה להתפלל עכשיו</div>
   <h3>${esc(p.title)}</h3>
   <p>${esc(p.why)}</p>
@@ -1218,7 +1248,84 @@ function renderPrayNow(){
  el.querySelectorAll('[data-nus]').forEach(b=>b.onclick=()=>setNusach(b.dataset.nus));
  el.querySelector('#npGo').onclick=()=>goTo(p.k);
  const a=el.querySelector('#npAlso'); if(a) a.onclick=()=>goTo(p.also);
- el.querySelectorAll('[data-pr]').forEach(b=>b.onclick=()=>goTo(b.dataset.pr));
+ el.querySelectorAll('[data-pr]').forEach(b=>b.onclick=()=>{const v=b.dataset.pr;if(v.startsWith('#')){const t=document.querySelector(v);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});return}goTo(v)});
+}
+/* ---- chazan prayer (authentic liturgy + sourced checklist) ---- */
+const HINENI_HE=`הִנְנִי הֶעָנִי מִמַּעַשׂ, נִרְעָשׁ וְנִפְחָד מִפַּחַד יוֹשֵׁב תְּהִלּוֹת יִשְׂרָאֵל. בָּאתִי לַעֲמֹד וּלְהִתְחַנֵּן לְפָנֶיךָ עַל עַמְּךָ יִשְׂרָאֵל אֲשֶׁר שְׁלָחוּנִי, וְאַף עַל פִּי שֶׁאֵינִי כְּדַאי וְהָגוּן לְכָךְ. לָכֵן אֲבַקֵּשׁ מִמְּךָ אֱלֹהֵי אַבְרָהָם אֱלֹהֵי יִצְחָק וֵאלֹהֵי יַעֲקֹב, יְיָ יְיָ אֵל רַחוּם וְחַנּוּן, אֱלֹהֵי יִשְׂרָאֵל, שַׁדַּי אָיוֹם וְנוֹרָא, הֱיֵה נָא מַצְלִיחַ דַּרְכִּי אֲשֶׁר אָנֹכִי הוֹלֵךְ וְעוֹמֵד לְבַקֵּשׁ רַחֲמִים עָלַי וְעַל שׁוֹלְחַי. וְנָא אַל תַּפְשִׁיעֵם בְּחַטֹּאתַי, וְאַל תְּחַיְּבֵם בַּעֲוֹנוֹתַי, כִּי חוֹטֵא וּפוֹשֵׁעַ אָנִי. וְאַל יִכָּלְמוּ בִּפְשָׁעַי, וְאַל יֵבוֹשׁוּ בִי וְאַל אֵבוֹשׁ בָּם. וְקַבֵּל תְּפִלָּתִי כִּתְפִלַּת זָקֵן וְרָגִיל וּפִרְקוֹ נָאֶה וּזְקָנוֹ מְגֻדָּל וְקוֹלוֹ נָעִים וּמְעֹרָב בְּדַעַת עִם הַבְּרִיּוֹת. וְתִגְעַר בְּשָׂטָן לְבַל יַשְׂטִינֵנִי. וִיהִי נָא דִגְלֵנוּ עָלֶיךָ אַהֲבָה, וּפְשָׁעֵינוּ תְּכַסֶּה בְאַהֲבָה. וְכָל צָרוֹת וְרָעוֹת הֲפָךְ נָא לָנוּ וּלְכָל יִשְׂרָאֵל לְשָׂשׂוֹן וּלְשִׂמְחָה, לְחַיִּים וּלְשָׁלוֹם. הָאֱמֶת וְהַשָּׁלוֹם אֱהָבוּ. וְאַל יְהִי שׁוּם מִכְשׁוֹל בִּתְפִלָּתִי.
+וִיהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵי אַבְרָהָם אֱלֹהֵי יִצְחָק וֵאלֹהֵי יַעֲקֹב, הָאֵל הַגָּדוֹל הַגִּבּוֹר וְהַנּוֹרָא, אֵל עֶלְיוֹן, אֶהְיֶה אֲשֶׁר אֶהְיֶה, שֶׁכָּל הַמַּלְאָכִים שֶׁהֵם פּוֹעֲלֵי תְפִלּוֹת יָבִיאוּ תְפִלָּתִי לִפְנֵי כִסֵּא כְבוֹדֶךָ, וְיָפִיצוּ אוֹתָהּ לְפָנֶיךָ, בַּעֲבוּר כָּל הַצַּדִּיקִים וְהַחֲסִידִים וְהַתְּמִימִים וְהַיְשָׁרִים, וּבַעֲבוּר כְּבוֹד שִׁמְךָ הַגָּדוֹל וְהַנּוֹרָא. כִּי אַתָּה שׁוֹמֵעַ תְּפִלַּת עַמְּךָ יִשְׂרָאֵל בְּרַחֲמִים. בָּרוּךְ אַתָּה שׁוֹמֵעַ תְּפִלָּה.`;
+const ELMELECH_HE=`אֵל מֶלֶךְ נֶאֱמָן, שַׁדַּי, מֶלֶךְ עֶלְיוֹן, קַבֵּל שַׁוְעָתִי בְּרָצוֹן, אַמֵּץ לְבָבִי. יְיָ אֱלֹהֵינוּ יְיָ אֶחָד, אֵל חַי, דַּיַּן אֱמֶת, שׁוֹפֵט צֶדֶק, רַחוּם וְחַנּוּן, רַחֵם עָלַי וּשְׁמַע הַיּוֹם אֲשֶׁר אַעְתִּיר בַּעֲדִי וּבְעַד בֵּיתִי וּבְעַד עֲדָתִי הַמַּסְכִּימִים עִמִּי בִּתְפִלָּתִי. וְתִכְלֹל תְּפִלָּתֵנוּ עִם כָּל תְּפִלּוֹת הַיְשָׁרוֹת וְהַנְּקִיּוֹת שֶׁיִּתְפַּלְּלוּ הַיּוֹם עַמְּךָ יִשְׂרָאֵל. וְתַחְתֹּר תַּחַת כִּסֵּא כְבוֹדֶךָ, כְּמוֹ שֶׁחָתַרְתָּ לִתְפִלַּת מְנַשֶּׁה. שֶׁלֹּא יֵבוֹשׁוּ שׁוֹלְחַי בִּי וְלֹא אֲנִי בָּהֶם. יִהְיוּ לְרָצוֹן אִמְרֵי פִי וְהֶגְיוֹן לִבִּי לְפָנֶיךָ, יְיָ צוּרִי וְגֹאֲלִי. אָמֵן סֶלָה.
+יְהִי רָצוֹן לְפָנֶיךָ אָיוֹם וְנוֹרָא, שֶׁתִּתֵּן לִי קוֹל עָרֵב וְנָעִים הַיּוֹם, וְאַל יִפְסֹק קוֹלִי, וְאַל יִחַר גְּרוֹנִי, וְיִהְיֶה קוֹלִי נָעִים וְחָזָק, כְּמוֹ שֶׁנֶּאֱמַר: וַיְהִי קוֹל הַשֹּׁפָר הוֹלֵךְ וְחָזֵק מְאֹד. אָמֵן סֶלָה.`;
+const RTAM_HE=[
+ 'יָדַעְתִּי יְיָ כִּי צֶדֶק מִשְׁפָּטֶיךָ וֶאֱמוּנָה עִנִּיתָנִי.',
+ 'הַקְשִׁיבָה לִּי וַעֲנֵנִי אָרִיד בְּשִׂיחִי וְאָהִימָה.',
+ 'וְנַפְשִׁי תָּגִיל בַּייָ תָּשִׂישׂ בִּישׁוּעָתוֹ.',
+ 'הַנּוֹתֵן תְּשׁוּעָה לַמְּלָכִים הַפּוֹצֶה אֶת דָּוִד עַבְדּוֹ מֵחֶרֶב רָעָה.'
+];
+const BERA_HE='יְהִי רָצוֹן מִלְּפָנֶיךָ ה\' אֱלֹהַי, שֶׁלֹּא יֶאֱרַע דָּבָר תַּקָּלָה עַל יָדִי, וְלֹא אֶכָּשֵׁל בִּדְבַר הֲלָכָה וְיִשְׂמְחוּ בִי חֲבֵרַי, וְלֹא אוֹמַר עַל טָהוֹר טָמֵא וְעַל טָמֵא טָהוֹר, וְלֹא יִכָּשְׁלוּ חֲבֵרַי בִּדְבַר הֲלָכָה וְאֶשְׂמַח בָּהֶם.';
+function czLi(t,s){return `<li>${t}<span class="src-line">מקור: ${s}</span></li>`}
+function renderChazan(hol){
+ const el=$('#chazanCard'); if(!el) return;
+ const opened=[...el.querySelectorAll('details')].map(d=>d.open);
+ const s=seasonFlags();
+ const h=hol||(HEBDAY?holidayFlags(HEBDAY):{rosh:0,chanukah:0,purim:0,moed:0,fast:0,rh:0,yk:0,shabbat:EFF().getDay()===6});
+ const today=[],soon=[];
+ if(s.tishri22) today.push(czLi('בשחרית עדיין «מוֹרִיד הַטָּל»; ממוסף של שמע״צ אומרים «מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם».','שו״ע או״ח קיד,א – מתחילים ממוסף שמע״צ עד מוסף יום ראשון של פסח'));
+ else if(s.nisan15) today.push(czLi('בשחרית עדיין «מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם»; ממוסף של פסח – «מוֹרִיד הַטָּל» בנוסח ספרד ועדות המזרח (ובקהילות אשכנז בארץ נהוג לאומרו גם כן; בנוסח אשכנז של חו״ל יש ששותקים בקיץ).','שו״ע או״ח קיד'));
+ else if(s.geshem) today.push(czLi('בעמידה, בברכת «אתה גבור»: «מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם».','שו״ע או״ח קיד,א'));
+ else today.push(czLi('בעמידה, בברכת «אתה גבור»: «מוֹרִיד הַטָּל» – כך בנוסח ספרד ועדות המזרח, וכן ברוב קהילות אשכנז בארץ ישראל.','שו״ע או״ח קיד; מנהג ארץ ישראל'));
+ if(s.tal) today.push(czLi('בברכת השנים: «וְתֵן טַל וּמָטָר לִבְרָכָה».','שו״ע או״ח קיז,א – בארץ ישראל מתחילים מליל ז׳ בחשון עד תפילת פסח'));
+ else today.push(czLi('בברכת השנים: «וְתֵן בְּרָכָה» (אין שואלים טל ומטר).','שו״ע או״ח קיז,א'));
+ if(h.shabbat) today.push(czLi('היום שבת: מתפללים תפילת שבת בת שבע ברכות, ולא שמונה עשרה של חול.','שו״ע או״ח רסח'));
+ if(h.rosh) today.push(czLi('ראש חודש: «יַעֲלֶה וְיָבוֹא» בברכת «רצה», חצי הלל, ותפילת מוסף.','שו״ע או״ח תכב'));
+ if(h.chanukah) today.push(czLi('חנוכה: «עַל הַנִּסִּים» בברכת «מודים», והלל שלם.','שו״ע או״ח תרפב; תרפג'));
+ if(h.purim) today.push(czLi('פורים: «עַל הַנִּסִּים» בברכת «מודים».','שו״ע או״ח תרצג'));
+ if(h.moed) today.push(czLi('מועד: «יַעֲלֶה וְיָבוֹא» בברכת «רצה», והלל (שלם ברוב המועדים).','שו״ע או״ח תפח–תצ, תרמד'));
+ if(h.fast) today.push(czLi('תענית ציבור: בחזרת הש״ץ אומר החזן «עֲנֵנוּ» כברכה בפני עצמה בין «גואל» ל«רפאנו» (היחיד אומר «עננו» ב«שומע תפילה»).','שו״ע או״ח תקסה,א–ג'));
+ if(h.rh||h.yk) today.push(czLi('היום מן הימים הנוראים: בקהילות אשכנז ובנוסח ספרד אומר שליח הציבור «הִנְנִי הֶעָנִי מִמַּעַשׂ» לפני מוסף, ואחריה חצי קדיש.','מחזור ר״ה ויוה״כ, נוסח אשכנז וספרד'));
+ if(!h.chanukah && s.toChanukah && s.toChanukah<=14) soon.push(`בעוד ${s.toChanukah} ימים מתחיל חנוכה: אז מוסיפים «עַל הַנִּסִּים» ב«מודים», ואומרים הלל שלם. (שו״ע או״ח תרפב–תרפג)`);
+
+ const prep=[
+  czLi('לפני העלייה לתיבה עיינו בסידור בתוספות היום (למעלה). בתפילות המועדים וראש חודש חובה להסדיר את התפילה מראש, כדי שתהא שגורה בפה ולא תיכשלו.','שו״ע או״ח ק,א'),
+  czLi('שליח ציבור יהא מקובל על הציבור, בעל קול נעים, ורגיל בתפילה; ויתפלל בכוונה, באימה וביראה – לא כדי להשמיע את קולו.','שו״ע או״ח נג,ד; נג,יא'),
+  czLi('החזן מתפלל תחילה בלחש עם הציבור, ואחר כך חוזר את התפילה בקול (חזרת הש״ץ). הלחש הוא גם כדי להסדיר את התפילה.','שו״ע או״ח קכד,א–ג'),
+  czLi('חצי קדיש: אחרי «ישתבח» בשחרית, ולפני העמידה במנחה, בערבית ובמוסף. אחרי העמידה – קדיש «תתקבל». פרטי הנוסח (כגון «ויצמח פורקניה») לפי הנוסח של בית הכנסת.','שו״ע או״ח נה; נג–נד; קכג'),
+  czLi('בארץ ישראל נושאים כפיים בכל יום בשחרית (ובמוסף) כשיש כהנים; החזן קורא «כהנים». אם אין כהנים, בנוסח אשכנז וספרד אומר החזן «אלהינו ואלהי אבותינו, ברכנו בברכה…». במנחה אין נשיאת כפיים, חוץ מתענית.','שו״ע או״ח קכח; מנהג ארץ ישראל')
+ ];
+
+ const edot=sid.n==='edot';
+ const hineniNote=edot
+  ? 'תפילה זו נאמרת בקהילות אשכנז ובנוסח ספרד (חסידי) לפני מוסף של ראש השנה ויום הכיפורים. ברוב קהילות עדות המזרח לא נהגו לאומרה; היא מובאת כאן לידיעה, לא כמנהג עדות המזרח.'
+  : 'תפילת שליח הציבור לפני מוסף בראש השנה וביום הכיפורים. אומרים אותה בכוונה, ואחריה חצי קדיש ומתחילים מוסף. נהוגה בקהילות אשכנז ובנוסח ספרד (חסידי). ברוב קהילות עדות המזרח לא נהגו לאומרה.';
+ const openHineni = (!edot && (h.rh||h.yk)) ? ' open' : '';
+ const openBera = ' open';
+
+ el.innerHTML=`<div class="np-k">תפילת שליח הציבור</div>
+  <h3 id="chazanTitle">לפני שעולים לתיבה</h3>
+  <p class="lead">לפני שעולים לתיבה כשליח ציבור, עיינו בתוספות היום והתפללו שלא תארע תקלה. התפילות כאן הן נוסח מסורתי ממקורות שצוינו – אינן דברי הרב. הנוסח שלכם עכשיו: <b>${esc(NUS[sid.n])}</b>.</p>
+  <div class="cz-box" id="czToday"><span class="k">היום להוסיף</span><ul>${today.join('')}</ul>${soon.length?`<div class="cz-soon">${soon.map(esc).join('<br>')}</div>`:''}</div>
+  <div class="cz-box"><span class="k">כדי שלא תטעה</span><ul class="cz-list">${prep.join('')}</ul>
+   <p class="note" style="margin-top:8px">ההלכות כאן לתזכורת לימודית לפי המקור שצוין ליד כל סעיף, במנהג ארץ ישראל. הן אינן פסק הלכה ואינן דברי הרב. לשאלות הלכה למעשה – שאלו רב.</p></div>
+  <details class="czd"${openBera}><summary>תפילה שלא תארע תקלה – בכניסה לבית המדרש</summary>
+   <p class="cz-note">זו תפילתו של רבי נחוניא בן הקנה בכניסתו לבית המדרש, כפי שנשנתה במשנה ונתפרשה בתלמוד: מתפללים שלא תארע תקלה על ידו. היא נדפסת בסידורים בשם זה, ואינה תפילת חזן מיוחדת של יום חול. בקשת «ואל יהי שום מכשול בתפילתי» מופיעה בתוך «הנני העני ממעש» של הימים הנוראים, למטה.</p>
+   <div class="prayer-txt"><p>${esc(BERA_HE)}</p></div>
+   <span class="src-line">מקור: משנה ברכות ד,ב; תלמוד בבלי, ברכות כח ע״ב. נוסח הברַייתא כפי שנדפס בתלמוד.</span>
+  </details>
+  <details class="czd"${openHineni}><summary>הנני העני ממעש – לפני מוסף בימים הנוראים</summary>
+   <p class="cz-note">${esc(hineniNote)}</p>
+   <div class="prayer-txt">${HINENI_HE.split('\n').map(t=>`<p>${esc(t)}</p>`).join('')}</div>
+   <p class="cz-note">יש מדפיסים «דִגְלֵנוּ» ויש «דִּלּוּגֵנוּ». בנוסחים יש גם «יָפִיצוּ» או «יַצִּיגוּ» את התפילה לפני כיסא הכבוד. «ברוך אתה שומע תפלה» נאמר כאן בלי שם ומלכות, ואינו ברכה בפני עצמה.</p>
+   <details class="czd" style="margin-top:8px"><summary>ויש מוסיפים: «אל מלך נאמן»</summary>
+    <div class="prayer-txt">${ELMELECH_HE.split('\n').map(t=>`<p>${esc(t)}</p>`).join('')}</div>
+    <p class="cz-note">יש מדפיסים «לתפילת משה» במקום «לתפילת מנשה». הפסוק «יהיו לרצון» – תהלים יט,טו; «ויהי קול השופר» – שמות יט,יט.</p>
+   </details>
+   <details class="czd" style="margin-top:8px"><summary>ויש נוהגים להוסיף ארבעה פסוקים, קבלה מרבנו תם</summary>
+    <div class="prayer-txt">${RTAM_HE.map(t=>`<p>${esc(t)}</p>`).join('')}</div>
+    <span class="src-line">מקור: תהלים קיט,עה; נה,ג; לה,ט; קמד,י. נדפס במחזורים כקבלה מרבנו תם, לומר אחרי «הנני» קודם מוסף.</span>
+   </details>
+   <span class="src-line">מקור הנוסח: מחזור לראש השנה, תחינות לשליח הציבור לפני מוסף – נוסח מסורתי כפי שנדפס במחזורי אשכנז וספרד (כאן לפי ויקיטקסט, סידור נוסח אשכנז, מוסף ראש השנה). התפילה עצמה נדפסה כבר בסידור ר׳ נפתלי הירץ טריוויש, ש״ך (1560).</span>
+  </details>`;
+ if(opened.length) el.querySelectorAll('details').forEach((d,i)=>{if(opened[i])d.open=true});
+ if(!hol && !HEBDAY) fetchHebDay().then(j=>renderChazan(holidayFlags(j))).catch(()=>{});
 }
 const MEM_KEY='rbs_member',PATH_KEY='rbs_path',ONB_KEY='rbs_onboard';
 const getMember=()=>{try{return JSON.parse(localStorage.getItem(MEM_KEY)||'null')}catch(e){return null}};
@@ -1411,7 +1518,7 @@ function community(){
 }
 
 /* ---------- init ---------- */
-calendar();renderPrayNow();hilulot();renderSeason();renderMitzDay();renderParasha();renderSaying();voiceLib();siddur();calInit();renderDaily();temple();drawChips();renderLib();community();
+calendar();renderPrayNow();renderChazan();hilulot();renderSeason();renderMitzDay();renderParasha();renderSaying();voiceLib();siddur();calInit();renderDaily();temple();drawChips();renderLib();community();
 </script>
 <button type="button" class="totop" id="toTop" aria-label="חזרה לראש העמוד">↑</button>
 <script>(()=>{const sh=document.getElementById('shareSite');if(sh)sh.onclick=async()=>{const u='https://sagitz26-prog.github.io/haribona-shel-olam/',t=document.title;try{if(navigator.share){await navigator.share({title:t,url:u});return}await navigator.clipboard.writeText(u);sh.textContent='הקישור הועתק ✓'}catch(e){if(e&&e.name!=='AbortError'){prompt('העתיקו את הקישור:',u)}}};})();
